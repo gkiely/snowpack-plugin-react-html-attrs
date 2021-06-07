@@ -1,5 +1,9 @@
 const fs = require('fs');
+const transform = require('./transform');
+
 module.exports = function (snowpackConfig, options) {
+  console.log(process.env);
+
   // Update @types/react to allow 'class', if file is present
   const filePath = './node_modules/@types/react/index.d.ts';
   if (fs.existsSync(filePath)){
@@ -15,9 +19,7 @@ module.exports = function (snowpackConfig, options) {
     async transform({id, contents, isDev, fileExt}) {
       const extensions = options.extensions || ['.js', '.jsx', '.ts', '.tsx'];
       if (!extensions.includes(fileExt) || !contents) return;
-      // Testing: https://regex101.com/r/B5oRTv/1/
-      const reg = /(React\.createElement\([^)]+?)(class:)/g;
-      return contents.replace(reg, '$1className:')
+      return transform(contents);
     }
   };
 };
