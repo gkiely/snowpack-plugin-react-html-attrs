@@ -4,7 +4,7 @@ const transform = require('./transform');
 module.exports = function (snowpackConfig, options) {
   console.log(process.env);
 
-  // Update @types/react to allow 'class', if file is present
+  // Update @types/react to allow 'class' if file is present
   const filePath = './node_modules/@types/react/index.d.ts';
   if (fs.existsSync(filePath)){
     const fileContents = fs.readFileSync(filePath, 'utf-8');
