@@ -15,7 +15,7 @@ module.exports = function (snowpackConfig, options) {
     async transform({id, contents, isDev, fileExt}) {
       const extensions = options.extensions || ['.js', '.jsx', '.ts', '.tsx'];
       if (!extensions.includes(fileExt) || !contents) return;
-      return contents.replace(/(React\.createElement\([^)]+)(class)(:\s)/, '$1className$3')
+      return contents.replace(/(React\.createElement\([^)]+)(class)(:\s)/g, '$1className$3')
     }
   };
 };
